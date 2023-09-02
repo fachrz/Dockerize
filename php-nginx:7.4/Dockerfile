@@ -1,4 +1,8 @@
-FROM php:7.4-fpm-alpine3.15
+# syntax=docker/dockerfile:1
+FROM php:7.4-fpm-alpine3.15 AS original
+
+FROM scratch
+COPY --from=original / /
 
 WORKDIR /
 
@@ -6,6 +10,9 @@ WORKDIR /
 RUN apk add --no-cache --update \
     nginx \
     supervisor
+
+# install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Configuring
 COPY ./supervisor/supervisord.conf /supervisord.conf
