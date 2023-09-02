@@ -4,6 +4,10 @@ FROM php:7.4-fpm-alpine3.15 AS original
 FROM scratch
 COPY --from=original / /
 
+ENV OS_VERSION=Alpine3.15
+ENV PHP_VERSION=7.4-fpm
+ENV COMPOSER_VERSION=2
+
 WORKDIR /
 
 # installing
@@ -12,7 +16,7 @@ RUN apk add --no-cache --update \
     supervisor
 
 # install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --$COMPOSER_VERSION
 
 # Configuring
 COPY ./supervisor/supervisord.conf /supervisord.conf
