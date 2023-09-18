@@ -2,9 +2,13 @@
 
 # Start supervisord
 echo "Starting supervisord..."
-supervisord -c /supervisord.conf
 
-# Keep the script running to keep the container alive
-while true; do
-  sleep 1
-done
+mkdir /var/log/supervisor
+mkdir /var/log/php-fpm
+
+ln -sf /dev/stdout /var/log/nginx/access.log
+ln -sf /dev/stderr /var/log/nginx/error.log
+ln -sf /proc/self/fd/2 /var/log/php-fpm/access.log
+ln -sf /proc/self/fd/2 /var/log/php-fpm/error.log
+
+supervisord -c /etc/supervisord.conf
