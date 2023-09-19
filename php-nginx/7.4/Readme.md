@@ -27,4 +27,6 @@ $ docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag {Image}
 ```--push``` will pushing the image to the repositories
 
 How to Run :
-```docker run -t -d -p 80:80 --name php-nginx php-nginx:7.4```
+```
+docker run -t -d -p 80:80 --name php-nginx php-nginx:7.4
+```
