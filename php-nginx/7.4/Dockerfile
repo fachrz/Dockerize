@@ -19,9 +19,8 @@ WORKDIR /app
 RUN apk add --no-cache --update \
     nginx \
     supervisor && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --$COMPOSER_VERSION && \
-    docker-php-ext-install pdo_mysql
-
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --$COMPOSER_VERSION
+    
 # Configuring
 COPY ./supervisor/supervisord.conf /etc/supervisord.conf
 COPY ./php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
