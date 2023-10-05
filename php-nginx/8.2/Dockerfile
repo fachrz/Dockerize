@@ -7,6 +7,11 @@ COPY --from=original / /
 ENV OS_VERSION=Alpine3.18
 ENV PHP_VERSION=8.2-fpm
 ENV COMPOSER_VERSION=2
+ENV PHPIZE_DEPS="autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c"
+ENV PHP_INI_DIR=/usr/local/etc/php
+ENV PHP_CFLAGS="-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+ENV PHP_CPPFLAGS="-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+ENV PHP_LDFLAGS="-Wl,-O1 -pie"
 
 WORKDIR /app
 
