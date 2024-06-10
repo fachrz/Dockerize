@@ -22,7 +22,7 @@ $ docker buildx create --name mybuilder --use --bootstrap
 
 2. Build with Buildx
 ```sh
-$ docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag {Image} {Dockerfile Directory}
+$ docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag php-nginx:7.4 php-nginx/7.4
 ```
 
 ```--push``` will pushing the image to the repositories
