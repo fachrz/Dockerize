@@ -16,6 +16,7 @@ WORKDIR /app
 
 # installing
 RUN apk add --no-cache --update \
+    openssh-client \
     git \
     nginx \
     supervisor
