@@ -1,9 +1,10 @@
 
 What's inside :
-- Alpine
+- alpine
+- git
 - php7.4
-- Nginx 1.20.2
-- Composer 2
+- nginx
+- composer 1 & 2
 
 Notes :
 Application should put inside `/app`

@@ -6,7 +6,6 @@ COPY --from=original / /
 
 ENV OS_VERSION=Alpine3.15
 ENV PHP_VERSION=7.4-fpm
-ENV COMPOSER_VERSION=2
 ENV PHPIZE_DEPS="autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c"
 ENV PHP_INI_DIR=/usr/local/etc/php
 ENV PHP_CFLAGS="-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
@@ -17,10 +16,13 @@ WORKDIR /app
 
 # installing
 RUN apk add --no-cache --update \
+    git \
     nginx \
-    supervisor && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --$COMPOSER_VERSION
+    supervisor
 
+# installing composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer1 --1 && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy all php-fpm configuration
 RUN rm /usr/local/etc/php-fpm.d/*
